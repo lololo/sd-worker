@@ -1,3 +1,23 @@
+# FROM alpine/git:2.36.2 as download
+
+# COPY builder/clone.sh /clone.sh
+
+# # Clone the repos and clean unnecessary files
+# RUN . /clone.sh taming-transformers https://github.com/CompVis/taming-transformers.git 3ba01b241669f5ade541ce990f7650a3b8f65318 && \
+#     rm -rf data assets **/*.ipynb
+
+# RUN . /clone.sh stable-diffusion-stability-ai https://github.com/Stability-AI/stablediffusion.git cf1d67a6fd5ea1aa600c4df58e5b47da45f6bdbf && \
+#     rm -rf assets data/**/*.png data/**/*.jpg data/**/*.gif
+
+# RUN . /clone.sh CodeFormer https://github.com/sczhou/CodeFormer.git 8392d0334956108ab53d9439c4b9fc9c4af0d66d && \
+#     rm -rf assets inputs
+
+# RUN . /clone.sh BLIP https://github.com/salesforce/BLIP.git 3a29b7410476bf5f2ba0955827390eb6ea1f4f9d && \
+#     . /clone.sh k-diffusion https://github.com/crowsonkb/k-diffusion.git 045515774882014cc14c1ba2668ab5bad9cbf7c0 && \
+#     . /clone.sh clip-interrogator https://github.com/pharmapsychotic/clip-interrogator bc07ce62c179d3aab3053a623d96a071101d11cb && \
+#     . /clone.sh generative-models https://github.com/Stability-AI/generative-models 477d8b9a7730d9b2e92b326a770c0420d00308c9
+
+
 FROM ubuntu:latest
 
 
@@ -12,16 +32,11 @@ ENV DEBIAN_FRONTEND=noninteractive \
     ROOT=/stable-diffusion-webui \
     PYTHONUNBUFFERED=1
 
-# RUN pip install -q torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 torchtext==0.15.2 torchdata==0.6.1 --extra-index-url https://download.pytorch.org/whl/cu118 -i https://pypi.tuna.tsinghua.edu.cn/simple && \
-#     pip install -q xformers==0.0.20 triton==2.0.0 gradio_client==0.2.7 -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install -q torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 torchtext==0.15.2 torchdata==0.6.1 --extra-index-url https://download.pytorch.org/whl/cu118 && \
+    pip install -q xformers==0.0.20 triton==2.0.0 gradio_client==0.2.7 -U
 
 RUN git clone  https://github.com/AUTOMATIC1111/stable-diffusion-webui.git && \
-    cd stable-diffusion-webui && \
-    git reset --hard 
-# git -C  ${ROOT}/repositories/stable-diffusion-stability-ai reset --hard
-
-RUN pip install -r ${ROOT}/requirements_versions.txt 
-
+    cd stable-diffusion-webui 
 
 COPY builder/requirements.txt /requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip \
@@ -42,4 +57,3 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 RUN apt-get autoremove -y && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*
-
