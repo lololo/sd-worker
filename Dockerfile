@@ -43,7 +43,7 @@ RUN apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
 
 COPY /builder/controlnet_model.txt /controlnet_model.txt
-RUN aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -i /controlnet_model.txt -d ${ROOT}/extensions/sd-webui-controlnet/models/
+# RUN aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -i /controlnet_model.txt -d ${ROOT}/extensions/sd-webui-controlnet/models/
 
 
 ADD src .
