@@ -42,6 +42,8 @@ RUN apt-get autoremove -y && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*
 
+RUN aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://civitai.com/api/download/models/11745 -d /
+
 COPY /builder/controlnet_model.txt /controlnet_model.txt
 
 ADD src .

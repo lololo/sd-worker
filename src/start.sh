@@ -8,7 +8,7 @@ echo "Worker Initiated"
 path="/runpod-volume/stable-diffusion-webui"
 
 if [ -d $path ]; then
-    echo "exsit"
+    
 else
     cp -r /stable-diffusion-webui $path
     aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://civitai.com/api/download/models/11745 -d $path/models/Stable-diffusion/ &
