@@ -11,7 +11,7 @@ if [ -d $path ]; then
     echo "exsit"
 else
     cp -r /stable-diffusion-webui $path
-    aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://civitai.com/api/download/models/6424 -d $path/models/Stable-diffusion/ &
+    aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://civitai.com/api/download/models/11745 -d $path/models/Stable-diffusion/ &
     aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -i /controlnet_model.txt -d $path/extensions/sd-webui-controlnet/models/
 fi
 
