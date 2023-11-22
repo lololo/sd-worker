@@ -9,7 +9,7 @@ RUN  wget https://github.com/camenduru/gperftools/releases/download/v1.0/libtcma
 ENV DEBIAN_FRONTEND=noninteractive \
     PIP_PREFER_BINARY=1 \
     LD_PRELOAD=/libtcmalloc_minimal.so.4 \
-    ROOT=/runpod-volume/stable-diffusion-webui \
+    ROOT=/stable-diffusion-webui \
     PYTHONUNBUFFERED=1
 
 # RUN pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
@@ -43,10 +43,6 @@ RUN apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
 
 COPY /builder/controlnet_model.txt /controlnet_model.txt
-# COPY /builder/controlnet_model_local2.txt /controlnet_model.txt
-# RUN aria2c --console-log-level=error -c -x 16 -s 16 -k 1M http://172.17.0.1:8081/v1-5-pruned-emaonly.ckpt -d /stable-diffusion-webui/models/Stable-diffusion/ && \
-#     aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -i /controlnet_model.txt -d /stable-diffusion-webui/extensions/sd-webui-controlnet/models/
-
 
 ADD src .
 
