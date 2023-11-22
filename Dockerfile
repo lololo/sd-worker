@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:22.04
 
 
 RUN apt -y update -qq && \ 
@@ -9,15 +9,15 @@ RUN  wget https://github.com/camenduru/gperftools/releases/download/v1.0/libtcma
 ENV DEBIAN_FRONTEND=noninteractive \
     PIP_PREFER_BINARY=1 \
     LD_PRELOAD=/libtcmalloc_minimal.so.4 \
-    ROOT=/stable-diffusion-webui \
+    ROOT=/runpod-volume/stable-diffusion-webui \
     PYTHONUNBUFFERED=1
 
 # RUN pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
 RUN pip install -q torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 torchtext==0.15.2 torchdata==0.6.1 --extra-index-url https://download.pytorch.org/whl/cu118 && \
     pip install -q xformers==0.0.20 triton==2.0.0 gradio_client==0.2.7 
 
-RUN git clone -b v2.6 https://github.com/camenduru/stable-diffusion-webui && \
-    cd stable-diffusion-webui && \
+RUN git clone -b v2.6 https://github.com/camenduru/stable-diffusion-webui ${ROOT} && \
+    cd ${ROOT} && \
     git reset --hard 
 
 COPY builder/requirements.txt /requirements.txt
