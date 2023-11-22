@@ -12,7 +12,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     ROOT=/stable-diffusion-webui \
     PYTHONUNBUFFERED=1
 
-RUN pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
+# RUN pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
 RUN pip install -q torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 torchtext==0.15.2 torchdata==0.6.1 --extra-index-url https://download.pytorch.org/whl/cu118 && \
     pip install -q xformers==0.0.20 triton==2.0.0 gradio_client==0.2.7 
 
