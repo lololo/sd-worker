@@ -1,5 +1,6 @@
 
 echo "Worker Initiated"
+# aria2c --console-log-level=error -c -x 16 -s 16 -k 1M http://172.17.0.1:8081/v1-5-pruned-emaonly.ckpt -d /stable-diffusion-webui/models/Stable-diffusion/ &
 
 aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://civitai.com/api/download/models/6424 -d /stable-diffusion-webui/models/Stable-diffusion/ &
 

@@ -27,7 +27,7 @@ def wait_for_service(url):
         except Exception as err:
             print("Error: ", err)
 
-        time.sleep(0.2)
+        time.sleep(20)
 
 
 def run_inference(inference_request):
