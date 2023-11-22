@@ -3,7 +3,7 @@
 echo "Worker Initiated"
 # aria2c --console-log-level=error -c -x 16 -s 16 -k 1M http://172.17.0.1:8081/v1-5-pruned-emaonly.ckpt -d /stable-diffusion-webui/models/Stable-diffusion/ &
 
-https://civitai.com/api/download/models/6424
+# https://civitai.com/api/download/models/6424
 
 path="/runpod-volume/stable-diffusion-webui"
 
