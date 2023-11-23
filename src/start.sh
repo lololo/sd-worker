@@ -5,22 +5,22 @@ echo "Worker Initiated"
 
 path="/runpod-volume/stable-diffusion-webui"
 
-MODEL_FILE="chilloutmix_NiPrunedFp32Fix.safetensors"
-MODEL_PATH="$path/models/Stable-diffusion/$MODEL_FILE"
+# MODEL_FILE="chilloutmix_NiPrunedFp32Fix.safetensors"
+# MODEL_PATH="$path/models/Stable-diffusion/$MODEL_FILE"
 
-if [ -d $path ]; then
-    echo "exsit"
-    if [ -f $MODEL_PATH ]; then
-        echo "model file exsit"
-    else
-        cp "/$MODEL_FILE" $MODEL_PATH
-    fi
+# if [ -d $path ]; then
+#     echo "exsit"
+#     if [ -f $MODEL_PATH ]; then
+#         echo "model file exsit"
+#     else
+#         cp "/$MODEL_FILE" $MODEL_PATH
+#     fi
 
-else
-    cp -r /stable-diffusion-webui $path
-    aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://civitai.com/api/download/models/11745 -d $path/models/Stable-diffusion/ &
-    aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -i /controlnet_model.txt -d $path/extensions/sd-webui-controlnet/models/
-fi
+# else
+#     cp -r /stable-diffusion-webui $path
+#     aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://civitai.com/api/download/models/11745 -d $path/models/Stable-diffusion/ &
+#     aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -i /controlnet_model.txt -d $path/extensions/sd-webui-controlnet/models/
+# fi
 
 echo "Starting WebUI API"
 

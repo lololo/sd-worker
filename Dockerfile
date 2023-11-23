@@ -13,6 +13,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1
 
 # RUN pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
+
+
 RUN pip install -q torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 torchtext==0.15.2 torchdata==0.6.1 --extra-index-url https://download.pytorch.org/whl/cu118 && \
     pip install -q xformers==0.0.20 triton==2.0.0 gradio_client==0.2.7 
 
@@ -42,11 +44,11 @@ RUN apt-get autoremove -y && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*
 
-RUN aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://civitai.com/api/download/models/11745 -d /
+# RUN aria2c --console-log-level=error -c-x 16 -s 16 -k 1M https://civitai.com/api/download/models/11745 -d /
 
 COPY /builder/controlnet_model.txt /controlnet_model.txt
 
 ADD src .
 
 RUN chmod +x /start.sh
-CMD /start.sh
+ENTRYPOINT ["/start.sh"]
